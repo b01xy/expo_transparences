@@ -2,7 +2,7 @@
 
 Programme associé au dispositif G4 Dévier la lumière de l'expo Transparence
 en coopération avec l'atelier TAC
-Auteur : Benjamin CADON pour la Labomedia - Licence GNU GPL v3.0
+Auteur : Benjamin CADON pour la Labomedia - Licence GNU GPL v3.0 https://www.gnu.org/licenses/gpl-3.0.fr.html
 
 Scénario d'usage :
 On appuie sur le bouton jaune
@@ -16,7 +16,7 @@ on éteind le laser
 Un nouvel appui sur le bouton jaune allume le laser suivant
 
 Si pas de détection de laser au bout de xx minutes, on considère qu'il n'y a plus personne devant le dispositif
-On éteind
+On éteint
 
 VERSION 2 LASERS 2 CIBLES
 
@@ -38,7 +38,6 @@ TimeOut timeout0;
 void callback0();
 
 
-
 void setup() {
    pinMode(2, INPUT_PULLUP);    // déclarer la broche 2 comme entrée pour l'interrupteur jaune
    pinMode(4, OUTPUT); // déclarer la broche 4 comme sortie laser 1
@@ -48,7 +47,6 @@ void setup() {
    pinMode(12, OUTPUT); // déclarer la broche 12 comme sortie pour la LED verte pour cible 1
    pinMode(13, OUTPUT); // déclarer la broche 13 comme sortie pour la LED verte pour cible 2
    Serial.begin(9600);
-   
 }
 
 
@@ -81,16 +79,11 @@ void loop() {
         digitalWrite(5, HIGH);
         //digitalWrite(6, LOW);
   }
-  // if (numlaser == 3 && start == 1) {
-  //       digitalWrite(4, LOW);
-  //       digitalWrite(5, LOW);
-  //       digitalWrite(6, HIGH);
-  // }
+
   // On lit la valeur du capteur
   sensorValue0 = analogRead(analogInPin0);
   sensorValue1 = analogRead(analogInPin1);
   // print the results to the Serial Monitor:
- // Serial.println("sensor_LDR");
   Serial.print("sensorValue0 ");
   Serial.print(sensorValue0);
   Serial.print("   sensorValue1 ");
@@ -111,7 +104,6 @@ void loop() {
     delay(3000);
     digitalWrite(4, LOW);
     digitalWrite(5, LOW);
-    //digitalWrite(6, LOW);
     digitalWrite(12, LOW); // LED cible 1
     digitalWrite(13, LOW); // LED cible 2
     timeout0.cancel(); 
@@ -119,7 +111,6 @@ void loop() {
   if (start == 0) { // On eteind tout car jeu gagné ou pas d'activité
       digitalWrite(4, LOW);
       digitalWrite(5, LOW);
-      //digitalWrite(6, LOW);
       digitalWrite(9, LOW);  // Audio
       digitalWrite(12, LOW); // LED cible 1
       digitalWrite(13, LOW); // LED cible 2
@@ -134,7 +125,6 @@ void callback0() {
   Serial.println("");
   digitalWrite(4, LOW);
   digitalWrite(5, LOW);
-  //digitalWrite(6, LOW);
   digitalWrite(9, LOW);  // Audio
   digitalWrite(12, LOW); // LED cible 1
   digitalWrite(13, LOW); // LED cible 2
