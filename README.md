@@ -4,6 +4,8 @@ Codes et plans pour 2 modules de l'expo "Transparences" réalisés au titre de [
 
 Tous les contenus sont sous licence  - Licence GNU GPL v3.0 https://www.gnu.org/licenses/gpl-3.0.fr.html sauf avis contraire
 
+[Documentation technique à voir ici](https://ressources.labomedia.org/exposition_transparence)
+
 Les 2 modules :
 
 ## G4 Dévier la lumière de l'expo Transparence
