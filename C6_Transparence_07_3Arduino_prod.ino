@@ -23,7 +23,7 @@ On éteind
 
  */
 
- #include "RunningAverage.h"// Numéros de sorties Digital de l'Arduino pour connecter les LEDS 
+//#include "RunningAverage.h"// Numéros de sorties Digital de l'Arduino pour connecter les LEDS 
 int TransparentROUGE = 10;
 int TransparentVERT = 9;
 int TransparentBLEU = 8;
@@ -52,7 +52,6 @@ int ValeurSensorTransparent = 1000;   // variable pour le capteur LDR transparen
 
 bool running = false; // déclaration d'une variable de type booléenne appelée running et initialisée à false
 int delaisEssai = 66; // délais entre chaque essai pour laisser allumé les LEDs RVB quand un disque est inséré
-int compteRebourPostEssai; // variable pour éteindre les leds après 'delaisEssai' ms
 int nbreMoy = 50; // check nombre de val[] !
 int val[ 50 ] ; // val is an array of 50 integers
 
@@ -237,8 +236,8 @@ void loop() {
   // On reçoit le signal de fin de compte à rebours  
   if (digitalRead(finPin) == HIGH){
     running = false;
-    Serial.println("Fin de partie !!!!!!");
-    Serial.println("");
+    // Serial.println("Fin de partie !!!!!!");
+    // Serial.println("");
     digitalWrite(OpaqueROUGE, HIGH);
     digitalWrite(TranslucideROUGE, HIGH);
     digitalWrite(TransparentROUGE, HIGH);

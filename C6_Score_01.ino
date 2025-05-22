@@ -84,7 +84,7 @@ void loop() {
     Serial.println("un point en plus");
     disp.print(score);
     //delay(6);
-    delay(500);
+    delay(199);
   }
   if (digitalRead(resetPin) == HIGH ) {
     delay(10000);
