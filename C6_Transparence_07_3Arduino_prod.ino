@@ -32,16 +32,17 @@ int TranslucideVERT = 6;
 int TranslucideBLEU = 5;
 int OpaqueROUGE = 4;
 int OpaqueVERT = 3;
-int OpaqueBLEU = 2;
+//int OpaqueBLEU = 2;
 
 int sensorTransparent = A0;   // entrée analogique pour le capteur LDR Opaque
 int sensorTranslucide = A1;   // entrée analogique pour le capteur LDR Translucide
 int sensorOpaque = A2;   // entrée analogique pour le capteur LDR Transparent
 
+const int finPin = 2;  // Broche de sortie pour le déclenchement du compte à rebours
 const int triggerCompteAReboursPin = 11;  // Broche de sortie pour le déclenchement du compte à rebours
 const int scorePin = 12;  // Broche de sortie pour le déclenchement du compte à rebours
-const int resetscorePin = 9;  // Broche de sortie pour le déclenchement du compte à rebours
-const int finPin = 7;  // Broche de sortie pour le déclenchement du compte à rebours
+const int resetscorePin = 13;  // Broche de sortie pour le déclenchement du compte à rebours
+
 
 
 int ValeurSensorOpaque = 1000;   // variable pour le capteur LDR opaque
@@ -50,12 +51,7 @@ int ValeurSensorTransparent = 1000;   // variable pour le capteur LDR transparen
 
 
 bool running = false; // déclaration d'une variable de type booléenne appelée running et initialisée à false
-int score;
-int myTime; // mesure du temps écoulé
-int compteRebour; // mesure du temps écoulé en millisecondes
-int compteRebourSeconde; // mesure du temps écoulé en millisecondes 
-int delaisMax = 90000; // temps de jeu en millisecondes
-int delaisEssai = 100; // délais entre chaque essai pour laisser allumé les LEDs RVB quand un disque est inséré
+int delaisEssai = 66; // délais entre chaque essai pour laisser allumé les LEDs RVB quand un disque est inséré
 int compteRebourPostEssai; // variable pour éteindre les leds après 'delaisEssai' ms
 int nbreMoy = 50; // check nombre de val[] !
 int val[ 50 ] ; // val is an array of 50 integers
@@ -75,7 +71,7 @@ int TopscoreOpaque = 40;
 int TopscoreTranslucide = 12;
 int TopscoreTransparent = 20;
 
-float SeuilSensorDemarrage = 880; // Seuil pour définir quand le disque traverse l'une des fentes 
+float SeuilSensorDemarrage = 850; // Seuil pour définir quand le disque traverse l'une des fentes 
 float SeuilSensorTransparentH = 1010; // Seuil pour définir quand le disque est transparent
 float SeuilSensorTransparentB = 700; // Seuil pour définir quand le disque est transparent
 float SeuilSensorTranslucideH = 600; // Seuil pour définir quand le disque est translucide
@@ -118,11 +114,13 @@ void loop() {
   scoreTransparent = 0;
 
   if (ValeurSensorOpaque < SeuilSensorDemarrage || ValeurSensorTranslucide < SeuilSensorDemarrage || ValeurSensorTransparent  < SeuilSensorDemarrage){
-    running = true; // un disque a été inséré, on démarre le jeu
-    digitalWrite(triggerCompteAReboursPin, HIGH);
-    Serial.println("on demarre le compte à rebours");
-    Serial.println(running);
-    //Serial.println(compteRebourSeconde);
+    //if (running == false){
+      running = true; // un disque a été inséré, on démarre le jeu
+      digitalWrite(triggerCompteAReboursPin, HIGH);
+      Serial.println("on demarre le compte à rebours");
+      Serial.println(running);
+      //Serial.println(compteRebourSeconde);
+    //}
   }
     digitalWrite(OpaqueVERT, LOW);
     digitalWrite(OpaqueROUGE, LOW);
@@ -149,7 +147,7 @@ void loop() {
             Serial.print (val[j]) ;
             Serial.print (",") ;
           }
-
+          affichelesvaleurs();
           if (scoreTranslucide > TopscoreTranslucide) {
             Serial.println("Translucide !!!");
             digitalWrite(OpaqueROUGE, HIGH);
@@ -183,7 +181,7 @@ void loop() {
             Serial.print (val[j]) ;
             Serial.print (",") ;
           }
-
+          affichelesvaleurs();
           if (scoreTranslucide > TopscoreTranslucide) {
             Serial.println("Translucide !!!");
             digitalWrite(TranslucideVERT, HIGH);
@@ -234,8 +232,9 @@ void loop() {
           }
           delay(delaisEssai);
       }
-  delay(200); // délais entre 2 insertion de disque ? à check si possible de baisser
-  }  
+  //delay(200); // délais entre 2 insertion de disque ? à check si possible de baisser
+  }
+  // On reçoit le signal de fin de compte à rebours  
   if (digitalRead(finPin) == HIGH){
     running = false;
     Serial.println("Fin de partie !!!!!!");
@@ -243,7 +242,7 @@ void loop() {
     digitalWrite(OpaqueROUGE, HIGH);
     digitalWrite(TranslucideROUGE, HIGH);
     digitalWrite(TransparentROUGE, HIGH);
-    delay(10000);
+    //delay(5000);
     digitalWrite(resetscorePin, HIGH);
   }
   delay(2);

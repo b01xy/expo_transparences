@@ -59,7 +59,7 @@ Affichage :::::
 EmSevenSegment disp(2,'C',2,3,4);
 
 const int scorePin = 12;  // Broche d'entrée pour le déclenchement du +1 au score
-const int resetPin = 9;  // Broche d'entrée pour le reset du score
+const int resetPin = 13;  // Broche d'entrée pour le reset du score
 int score = 0;
 
 void setup() {
@@ -87,10 +87,11 @@ void loop() {
     delay(500);
   }
   if (digitalRead(resetPin) == HIGH ) {
+    delay(10000);
     score = 0;
     Serial.println("reset du score");
     disp.print(score);
-    delay(500);
+    //delay(500);
   }
   //Serial.print(digitalRead(resetPin));  
   delay(2);

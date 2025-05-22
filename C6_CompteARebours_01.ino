@@ -58,7 +58,7 @@ EmSevenSegment disp(4,'C',2,3,4);
 
 const unsigned long countdownDuration = 90000; // Durée du compte à rebours : 1 min 30 sec = 90000 en millisecondes + 500 ms pour démarrage en souplesse
 const int triggerPin = 11;  // Broche d'entrée pour le déclenchement
-const int finPin = 7;  // Broche de sortie pour signifier la fin du compte à rebours
+const int finPin = 10;  // Broche de sortie pour signifier la fin du compte à rebours
 bool countdownStarted = false;
 unsigned long countdownStartTime = 0;
 unsigned long remainingTime = 0;
@@ -84,14 +84,14 @@ void loop() {
   if (digitalRead(triggerPin) == LOW && !countdownStarted) {
       disp.print(130);
       digitalWrite(finPin, LOW);
-      delay(500);
+      delay(10);
   }
   if (digitalRead(triggerPin) == HIGH && !countdownStarted) {
     countdownStarted = true;
     countdownStartTime = millis();
     remainingTime = countdownDuration;
     Serial.println("Compte à rebours démarré : 1 minute 30 secondes");
-    delay(500);
+    delay(10);
   }
 
   // Si le compte à rebours est en cours
