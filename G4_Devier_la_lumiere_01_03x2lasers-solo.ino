@@ -26,7 +26,7 @@ int numlaser = 0;
 int start = 0;
 const int analogInPin = A0;  // Analog input pin Capteur lumière LDR
 int sensorValue = 0;  // value read from the pot
-int seuil = 650; // seuil de détection du laser sur le capteur LDR = cible qui valide (650 pour rectangle 550 pour disque)
+int seuil = 600; // seuil de détection du laser sur le capteur LDR = cible qui valide (650 pour rectangle 550 pour disque)
 // régler la valeur de base de la lumiere captée à ~750 avec la petite vis du bornier bleu 
 
 TimeOut timeout0;
@@ -53,7 +53,7 @@ void loop() {
       start = 1;
       timeout0.cancel(); 
       numlaser = numlaser +1;
-      if (numlaser == 4) numlaser =1;
+      if (numlaser == 3) numlaser =1;
       Serial.println("Laser_numero");
       Serial.println(numlaser);
       digitalWrite(4, LOW);

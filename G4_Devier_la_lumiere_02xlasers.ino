@@ -57,6 +57,7 @@ void loop() {
     if (digitalRead(2) == LOW) { // Bouton jaune pressé, on allume le laser suivant
       Serial.println("Bouton_pressé");
       start = 1;
+      timeout0.cancel(); 
       numlaser = numlaser +1;
       if (numlaser == 3) numlaser =1;
       Serial.println("Laser_numero");
