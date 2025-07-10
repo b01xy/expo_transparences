@@ -38,10 +38,10 @@ int sensorTransparent = A0;   // entrée analogique pour le capteur LDR Opaque
 int sensorTranslucide = A1;   // entrée analogique pour le capteur LDR Translucide
 int sensorOpaque = A2;   // entrée analogique pour le capteur LDR Transparent
 
-const int finPin = 2;  // Broche de sortie pour le déclenchement du compte à rebours
-const int triggerCompteAReboursPin = 11;  // Broche de sortie pour le déclenchement du compte à rebours
-const int scorePin = 12;  // Broche de sortie pour le déclenchement du compte à rebours
-const int resetscorePin = 13;  // Broche de sortie pour le déclenchement du compte à rebours
+const int finPin = 2;  // Broche d'entrée pour la fin du compte à rebours < DIGITAL 2 de l'arduino compte à rebours
+const int triggerCompteAReboursPin = 11;  // Broche de sortie pour le déclenchement du compte à rebours > DIGITAL 11 de l'arduino compte à rebours
+const int scorePin = 12;  // Broche de sortie pour incrémenter le score > DIGITAL 12 de l'arduino score
+const int resetscorePin = 13;  // Broche de sortie pour reset du score > DIGITAL 13 de l'arduino score
 
 
 
